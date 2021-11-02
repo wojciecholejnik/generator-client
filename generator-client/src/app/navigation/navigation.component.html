@@ -1,0 +1,36 @@
+<h1>Jenerator</h1>
+
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+  <li [ngbNavItem]="1">
+    <a ngbNavLink>przegląd</a>
+    <ng-template ngbNavContent>
+      <app-preview></app-preview>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="2">
+    <a ngbNavLink>+ otwarte</a>
+    <ng-template ngbNavContent>
+      <app-add-open></app-add-open>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="3">
+    <a ngbNavLink>+ pojedyncze</a>
+    <ng-template ngbNavContent>
+      <app-add-single></app-add-single>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="4">
+    <a ngbNavLink>+ multi</a>
+    <ng-template ngbNavContent>
+      <app-add-multi></app-add-multi>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="5">
+    <a ngbNavLink>generuj</a>
+    <ng-template ngbNavContent>
+      <app-generate></app-generate>
+    </ng-template>
+  </li>
+</ul>
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>

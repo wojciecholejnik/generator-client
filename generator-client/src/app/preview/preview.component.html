@@ -1,0 +1,43 @@
+<div class="row filter">
+  <div class="col">
+    <h4>Wybierz kategorię: </h4>
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{ activeCategory }}</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button *ngFor="let category of categories" ngbDropdownItem (click)="setActiveCategory(category); filterDate()">{{ category }}</button>
+      </div>
+    </div>
+  </div>
+  <div class="col" *ngIf="filteredData && filteredData.length">
+    <h4>Wybierz typ: </h4>
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{ translateType(activeType) }}</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button ngbDropdownItem (click)="filterByType('singleSelect')">pojencze</button>
+        <button ngbDropdownItem (click)="filterByType('multiSelect')">multi</button>
+        <button ngbDropdownItem (click)="filterByType('open')">otwarte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3 *ngIf="filteredByCategory && filteredByCategory.length" >
+  Pytania w kategori: {{ activeCategory }}, typ: {{ translateType(activeType) }}
+</h3>
+<div *ngIf="filteredByCategory && filteredByCategory.length" class="answers">
+  <ngb-accordion #acc="ngbAccordion">
+    <ng-container *ngFor="let question of filteredByCategory">
+      <ngb-panel title="{{ question.questionContent }}">
+        <ng-template *ngIf="question.answers && question.answers.length" ngbPanelContent>
+          <ul>
+            <li [ngClass]="question.answers[0].isRight ? 'true' : 'false'">{{question.answers[0].content}}</li>
+            <li [ngClass]="question.answers[1].isRight ? 'true' : 'false'">{{question.answers[1].content}}</li>
+            <li [ngClass]="question.answers[2].isRight ? 'true' : 'false'">{{question.answers[2].content}}</li>
+            <li [ngClass]="question.answers[3].isRight ? 'true' : 'false'">{{question.answers[3].content}}</li>
+          </ul>
+        </ng-template>
+      </ngb-panel>
+    </ng-container>
+  </ngb-accordion>
+
+</div>
